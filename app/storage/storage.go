@@ -8,7 +8,8 @@ import (
 type Storage interface {
 	FindBeers() []models.Beer
 	SaveBeers([]models.Beer)
-	FindBeer(id int) models.Beer
+	FindBeer(beerID int) models.Beer
+	FindReviews(beerID int) []models.Review
 }
 
 // DB is the "global" storage instance

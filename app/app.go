@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+
 	"github.com/satioO/go_practices/app/handlers"
 	"github.com/satioO/go_practices/app/storage"
 )
@@ -21,12 +22,20 @@ func (a *App) Initialize() {
 	storage.PopulateBeers()
 
 	a.Router = mux.NewRouter()
-	a.Router.HandleFunc("/beers", handlers.GetBeers).Methods("GET")
-	a.Router.HandleFunc("/beers/{id}", handlers.GetBeer).Methods("GET")
 }
 
 // Run the application
 func (a *App) Run(addr string) {
 	fmt.Println("The beer server is on tap now.")
 	log.Fatal(http.ListenAndServe(addr, a.Router))
+}
+
+// SetupRoutes has the list of routes
+func (a *App) SetupRoutes() {
+	// ROUTES: BEERS
+	a.Router.HandleFunc("/beers", handlers.GetBeers).Methods("GET")
+	a.Router.HandleFunc("/beers/{beerId}", handlers.GetBeer).Methods("GET")
+
+	// ROUTES: REVIEWS
+	a.Router.HandleFunc("/beers/{beerId}/reviews", handlers.GetReviews).Methods("GET")
 }

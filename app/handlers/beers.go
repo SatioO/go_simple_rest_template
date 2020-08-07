@@ -20,7 +20,7 @@ func GetBeers(w http.ResponseWriter, r *http.Request) {
 // GetBeer gets all the beer in the inventory
 func GetBeer(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, _ := strconv.ParseInt(vars["id"], 0, 64)
-	cellar := storage.DB.FindBeer(int(id))
+	beerID, _ := strconv.ParseInt(vars["beerID"], 0, 64)
+	cellar := storage.DB.FindBeer(int(beerID))
 	utilities.RespondWithJSON(w, http.StatusOK, cellar)
 }
