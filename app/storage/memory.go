@@ -6,42 +6,41 @@ import (
 
 // MemoryStorage layered save only in memory
 type MemoryStorage struct {
-	cellar []models.Beer
+	cellar models.Beers
 }
 
 // FindBeers return all beers
-func (s *MemoryStorage) FindBeers() []models.Beer {
+func (s *MemoryStorage) FindBeers() models.Beers {
 	return s.cellar
 }
 
 // SaveBeers return all beers
-func (s *MemoryStorage) SaveBeers(beers []models.Beer) {
+func (s *MemoryStorage) SaveBeers(beers models.Beers) {
 	s.cellar = beers
 }
 
 // FindBeer returns a beer
 func (s *MemoryStorage) FindBeer(beerID int) models.Beer {
-	beer := models.Beer{}
+	beer, err := s.cellar.Find(func(beer models.Beer, i int) bool {
+		return beer.ID == beerID
+	})
 
-	for i, val := range s.cellar {
-		if val.ID == beerID {
-			beer = s.cellar[i]
-		}
+	if err != nil {
+		return models.Beer{}
 	}
 
 	return beer
 }
 
 // FindReviews returns a reviews on beer
-func (s *MemoryStorage) FindReviews(beerID int) []models.Review {
+func (s *MemoryStorage) FindReviews(beerID int) models.Reviews {
+	beer, err := s.cellar.Find(func(beer models.Beer, i int) bool {
+		return beer.ID == beerID
+	})
 
-	reviews := []models.Review{}
-
-	for i, val := range s.cellar {
-		if val.ID == beerID {
-			reviews = s.cellar[i].Reviews
-		}
+	if err != nil {
+		return []models.Review{}
 	}
 
-	return reviews
+	return beer.Reviews
 }

@@ -6,10 +6,10 @@ import (
 
 // Storage defines the functionality of a data store for the beer service
 type Storage interface {
-	FindBeers() []models.Beer
-	SaveBeers([]models.Beer)
+	FindBeers() models.Beers
+	SaveBeers(models.Beers)
 	FindBeer(beerID int) models.Beer
-	FindReviews(beerID int) []models.Review
+	FindReviews(beerID int) models.Reviews
 }
 
 // DB is the "global" storage instance
