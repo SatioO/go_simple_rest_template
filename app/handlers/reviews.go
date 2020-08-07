@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/satioO/go_practices/app/utilities"
-
 	"github.com/gorilla/mux"
+
 	"github.com/satioO/go_practices/app/storage"
+	"github.com/satioO/go_practices/app/utils"
 )
 
 // GetReviews gets all reviews of a beer
@@ -17,5 +17,5 @@ func GetReviews(w http.ResponseWriter, r *http.Request) {
 
 	reviews := storage.DB.FindReviews(int(beerID))
 
-	utilities.RespondWithJSON(w, http.StatusOK, reviews)
+	utils.RespondWithJSON(w, http.StatusOK, reviews)
 }
