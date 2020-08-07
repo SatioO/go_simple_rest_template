@@ -1,11 +1,14 @@
 package main
 
 import (
+	"strconv"
+
 	"github.com/satioO/go_practices/app"
 )
 
 func main() {
 	server := app.Server{}
 	server.Initialize()
-	server.Run(":3000")
+	port := strconv.Itoa(server.Config.Server.Port)
+	server.Run(":" + port)
 }

@@ -1,0 +1,5 @@
+server:
+  port: 3000
+mongo:
+  port: 27017
+  name: 'beers'
