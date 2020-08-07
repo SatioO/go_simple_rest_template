@@ -34,8 +34,8 @@ func (a *App) Run(addr string) {
 func (a *App) SetupRoutes() {
 	// ROUTES: BEERS
 	a.Router.HandleFunc("/beers", handlers.GetBeers).Methods("GET")
-	a.Router.HandleFunc("/beers/{beerId}", handlers.GetBeer).Methods("GET")
+	a.Router.HandleFunc("/beers/{beerID}", handlers.GetBeer).Methods("GET")
 
 	// ROUTES: REVIEWS
-	a.Router.HandleFunc("/beers/{beerId}/reviews", handlers.GetReviews).Methods("GET")
+	a.Router.HandleFunc("/beers/{beerID}/reviews", handlers.GetReviews).Methods("GET")
 }

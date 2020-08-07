@@ -23,10 +23,25 @@ func (s *MemoryStorage) SaveBeers(beers []models.Beer) {
 func (s *MemoryStorage) FindBeer(beerID int) models.Beer {
 	beer := models.Beer{}
 
+	for i, val := range s.cellar {
+		if val.ID == beerID {
+			beer = s.cellar[i]
+		}
+	}
+
 	return beer
 }
 
 // FindReviews returns a reviews on beer
 func (s *MemoryStorage) FindReviews(beerID int) []models.Review {
-	return []models.Review{}
+
+	reviews := []models.Review{}
+
+	for i, val := range s.cellar {
+		if val.ID == beerID {
+			reviews = s.cellar[i].Reviews
+		}
+	}
+
+	return reviews
 }
