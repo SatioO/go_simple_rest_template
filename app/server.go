@@ -9,13 +9,14 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/satioO/go_practices/app/storage"
+	"github.com/satioO/go_practices/config"
 )
 
 // Server defines the routing configuration
 type Server struct {
 	DB     *storage.Storage
 	Router *mux.Router
-	Config *Configurations
+	Config *config.Configurations
 }
 
 // Initialize the storage and router
@@ -31,7 +32,7 @@ func (a *Server) Initialize() {
 }
 
 // SetupConfig defines the default configuration
-func (a *Server) SetupConfig() *Configurations {
+func (a *Server) SetupConfig() *config.Configurations {
 	// Set the file name of the configurations file
 	viper.SetConfigName("config")
 	// Set the path to look for the configurations file
@@ -40,7 +41,7 @@ func (a *Server) SetupConfig() *Configurations {
 	viper.AutomaticEnv()
 
 	viper.SetConfigType("yaml")
-	var configuration Configurations
+	var configuration config.Configurations
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
